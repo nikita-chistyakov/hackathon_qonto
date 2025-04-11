@@ -1,8 +1,3 @@
-# Perudo_ai 
-Play Liar's dice against a set of Dust Agents in the Dust chat.
-
-## Liar's Dice Game Rules
-
 ### Objectives
 The dealer's objective is to orchestrate conversations between different players and provide them with the dice rolls, the correct context, and to make sure that they respect the rules of the game. 
 The player's objective is to be the last player standing at the end of the game.
@@ -88,10 +83,4 @@ When only one players remain in play with dice remaining, the game ends.
 
 ### Important Notes
 Both the player's responses are synthetic. They do not explain the rules nor their own reasoning. 
-When a bet is forbidden or unclear, repeat the exact same request again 
-
-
-## Challenges
-- Orchestrate several agents 
-- Ensure that dice rolls are actually random 
-- Compartmentize information within different player 
+When a bet is forbidden or unclear, repeat the exact same request again.  
