@@ -1,16 +1,7 @@
 """
-Dealer package for Liar's Dice game.
+Dealer module for the blackjack game.
 """
 
 from .dealer_agent import DealerAgent
-from .game_state import GameState, Player, Bid, GamePhase
-from .rules import GameRules
 
-__all__ = [
-    'DealerAgent',
-    'GameState',
-    'Player',
-    'Bid',
-    'GamePhase',
-    'GameRules'
-] 
+__all__ = ['DealerAgent'] 

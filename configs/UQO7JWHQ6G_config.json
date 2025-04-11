@@ -1,0 +1,30 @@
+{
+  "agentConfiguration": {
+    "id": 458904,
+    "sId": "UQO7JWHQ6G",
+    "versionCreatedAt": "2025-04-11T10:32:26.460Z",
+    "version": 2,
+    "scope": "published",
+    "userFavorite": false,
+    "name": "team_18_player",
+    "pictureUrl": "https://dust.tt/static/droidavatar/Droid_Red_8.jpg",
+    "description": "A liar's dice player agent",
+    "instructions": "You are acting as a Player for a game of Liar's Dice. You evaluate the rules and decide what to do next.",
+    "model": {
+      "providerId": "anthropic",
+      "modelId": "claude-3-7-sonnet-20250219",
+      "temperature": 0.7
+    },
+    "status": "active",
+    "actions": [],
+    "versionAuthorId": 54965,
+    "maxStepsPerRun": 12,
+    "visualizationEnabled": false,
+    "templateId": null,
+    "requestedGroupIds": [
+      [
+        "grp_mlxO3jwVHrMb"
+      ]
+    ]
+  }
+}

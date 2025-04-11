@@ -1,0 +1,30 @@
+{
+  "agentConfiguration": {
+    "id": 458889,
+    "sId": "w97zBHLRjZ",
+    "versionCreatedAt": "2025-04-11T10:19:46.065Z",
+    "version": 2,
+    "scope": "published",
+    "userFavorite": false,
+    "name": "team_18_dealer",
+    "pictureUrl": "https://dust.tt/static/droidavatar/Droid_Black_3.jpg",
+    "description": "A Lair's dice game dealer/master",
+    "instructions": "You are acting as a Dealer for a game of Liar's Dice. You evaluate the rules and decide what to do next.",
+    "model": {
+      "providerId": "anthropic",
+      "modelId": "claude-3-7-sonnet-20250219",
+      "temperature": 0.2
+    },
+    "status": "active",
+    "actions": [],
+    "versionAuthorId": 54965,
+    "maxStepsPerRun": 12,
+    "visualizationEnabled": false,
+    "templateId": null,
+    "requestedGroupIds": [
+      [
+        "grp_mlxO3jwVHrMb"
+      ]
+    ]
+  }
+}
