@@ -13,4 +13,4 @@ A Python script that interacts with an AI agent on Dust to simulate a Game Maste
 
 - Want the conversation to alternate: GM ↔️ Player1, GM ↔️ Player2, without leaking context across players
 
-*Python code in "orchestrator.api" file
+*Python code in 'orchestrator.py' file
