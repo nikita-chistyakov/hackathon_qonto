@@ -47,7 +47,7 @@ class Game:
             try:
                 message_dict = json.loads(self.message)
                 if "player" in message_dict and "prompt" in message_dict:
-                    next_conversation_id = self.players[int(message_dict["player"].replace("Player", ""))]["conversation_id"]
+                    next_conversation_id = self.players[int(message_dict["player"].replace("Player", "")-1)]["conversation_id"]
                     utils.create_message(next_conversation_id, message_dict["prompt"], self.player_agent_id)
                     self.process_message(next_conversation_id,i)
 
