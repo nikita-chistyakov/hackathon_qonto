@@ -98,10 +98,10 @@ def create_conversation(agent_id: str, initial_message: str = "Hello!") -> Dict[
         raise ValueError("DUST_WORKSPACE_ID and DUST_API_KEY must be set in .env file")
     
     # Validate agent_id
-    player_agent = os.getenv("PLAYER_AGENT_ID")
-    dealer_agent = os.getenv("DEALER_AGENT_ID")
-    if agent_id not in [player_agent, dealer_agent]:
-        raise ValueError("agent_id must be either PLAYER_AGENT_ID or DEALER_AGENT_ID from .env")
+    # player_agent = os.getenv("PLAYER_AGENT_ID")
+    # dealer_agent = os.getenv("DEALER_AGENT_ID")
+    # if agent_id not in [player_agent, dealer_agent]:
+    #     raise ValueError("agent_id must be either PLAYER_AGENT_ID or DEALER_AGENT_ID from .env")
     
     # Construct the API URL
     url = f"{base_url}/api/v1/w/{workspace_id}/assistant/conversations"
@@ -114,16 +114,67 @@ def create_conversation(agent_id: str, initial_message: str = "Hello!") -> Dict[
     
     # Prepare request payload
     payload = {
-        "title": "Game Rules Discussion",
+        "title": "Game Rules Discussion New",
         "visibility": "unlisted",
-        "messages": [{
+        "blocking": True,
+        "messages": {
             "content": initial_message,
-            "mentions": [{"configurationId": agent_id}]
-        }]
+            "mentions": [{"configurationId": agent_id}],
+            "context": {
+                "username": "max",
+                "timezone": "Europe/Paris"
+            }
+        },
+    
+        
+       
     }
     
     # Make the request
     response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status()
-    
     return response.json()
+
+def create_message(conversation_id: str, message: str, agent_sId: str) -> Dict[str, Any]:
+    """Create a new message in a specified conversation.
+    
+    Args:
+        conversation_id: The ID of the conversation to create the message in
+        message: The content of the message to create
+    """
+    wId = os.getenv("DUST_WORKSPACE_ID")
+    url =   f"https://dust.tt/api/v1/w/{wId}/assistant/conversations/{conversation_id}/messages"
+    api_key = os.getenv("DUST_API_KEY")
+    headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+    payload = {
+        "content": message,
+        "mentions": [{"configurationId": agent_sId}],
+        "context": {
+            "username": "max",
+            "timezone": "Europe/Paris"
+            }   
+    }
+    requests.post(url, headers=headers, json=payload)
+
+def get_conversation_last_message(conversation_id: str) -> Dict[str, Any]:
+    """Get all messages from a specified conversation.
+    
+    Args:
+        conversation_id: The ID of the conversation to get messages from
+
+    Returns:
+        Dict containing the messages from the conversation
+    """
+    wId = os.getenv("DUST_WORKSPACE_ID")
+    url =   f"https://dust.tt/api/v1/w/{wId}/assistant/conversations/{conversation_id}"
+    api_key = os.getenv("DUST_API_KEY")
+    headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+    # return last message
+    response = requests.get(url, headers=headers).json()
+    response_message = response['conversation']['content'][-1][0]['content']
+    return response_message
