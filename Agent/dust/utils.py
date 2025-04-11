@@ -73,3 +73,57 @@ def save_agent_config(agent_id: str, config: Dict[str, Any], output_dir: str = "
         json.dump(config, f, indent=2)
     
     return filepath 
+
+def create_conversation(agent_id: str, initial_message: str = "Hello!") -> Dict[str, Any]:
+    """Create a new conversation with a specified agent.
+    
+    Args:
+        agent_id: The ID of the agent to create conversation with. Should be either
+                 PLAYER_AGENT_ID or DEALER_AGENT_ID from environment variables.
+        initial_message: The first message to send in the conversation (default: "Hello!")
+        
+    Returns:
+        Dict containing the created conversation data
+        
+    Raises:
+        ValueError: If required environment variables are not set or invalid agent_id provided
+        requests.exceptions.RequestException: If the API request fails
+    """
+    # Get required environment variables
+    workspace_id = os.getenv("DUST_WORKSPACE_ID")
+    api_key = os.getenv("DUST_API_KEY")
+    base_url = os.getenv("DUST_BASE_URL", "https://dust.tt")
+    
+    if not all([workspace_id, api_key]):
+        raise ValueError("DUST_WORKSPACE_ID and DUST_API_KEY must be set in .env file")
+    
+    # Validate agent_id
+    player_agent = os.getenv("PLAYER_AGENT_ID")
+    dealer_agent = os.getenv("DEALER_AGENT_ID")
+    if agent_id not in [player_agent, dealer_agent]:
+        raise ValueError("agent_id must be either PLAYER_AGENT_ID or DEALER_AGENT_ID from .env")
+    
+    # Construct the API URL
+    url = f"{base_url}/api/v1/w/{workspace_id}/assistant/conversations"
+    
+    # Set up headers
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    
+    # Prepare request payload
+    payload = {
+        "title": "Game Rules Discussion",
+        "visibility": "unlisted",
+        "messages": [{
+            "content": initial_message,
+            "mentions": [{"configurationId": agent_id}]
+        }]
+    }
+    
+    # Make the request
+    response = requests.post(url, headers=headers, json=payload)
+    response.raise_for_status()
+    
+    return response.json()
