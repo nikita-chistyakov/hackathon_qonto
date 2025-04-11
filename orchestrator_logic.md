@@ -6,13 +6,11 @@ A Python script that interacts with an AI agent on Dust to simulate a Game Maste
 
 - The script should simulate or handle interactions between all three characters via Dust
 
-Here’s a base script to get you started 👇
-
 🧠 Assumptions:
-- You already have Dust agents set up for the GM, Player1, and Player2
+- Set up Dust agents for the GM, Player1, and Player2
 
-- You have API keys or credentials to interact with the Dust API
+- API keys or credentials to interact with the Dust API
 
-- You want the conversation to alternate: GM ↔️ Player1, GM ↔️ Player2, without leaking context across players
+- Want the conversation to alternate: GM ↔️ Player1, GM ↔️ Player2, without leaking context across players
 
 *Python code in "orchestrator.api" file
